@@ -52,6 +52,12 @@ export default function Todo() {
     setTasks(tasks.filter((_, i) => i !== index)); // Remove from pending
     toast.success("✅ Task marked as completed!");
   };
+  const backtopendingTask = (index) => {
+  const moveBackTask = completedTasks[index]; // Get the task from completedTasks
+  setTasks([...tasks, moveBackTask]); // Add it back to pending tasks
+  setCompletedTasks(completedTasks.filter((_, i) => i !== index)); // Remove from completedTasks
+  toast.info("🔄 Task moved back to Pending!");
+};
 
   return (
     <div className="container mt-5">
@@ -166,6 +172,10 @@ export default function Todo() {
                     <button onClick={() => removeTask(index, true)} className="btn btn-danger btn-sm">
                       🗑️ Remove
                     </button>
+                    <button onClick={() => backtopendingTask(index, true)} className="btn btn-warning ms-4 btn-sm">
+                       pending
+                    </button>
+
                   </td>
                 </tr>
               ))}
